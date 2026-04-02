@@ -14,3 +14,22 @@ import { Contact } from "./src/components/landing/Contact";
 import { Footer } from "./src/components/landing/Footer";
 import { ChatbotWidget } from "./src/components/landing/ChatbotWidget";
 
+const Landing = () => {
+  return (
+    <>
+      <Navbar />
+      <Hero />
+      <About />
+      <Services />
+      <WhyUs />
+      <Portfolio />
+      <Pricing />
+      <CTABanner />
+      <Contact />
+      <Footer />
+      <ChatbotWidget />
+    </>
+  );
+};
+
+export default Landing;
