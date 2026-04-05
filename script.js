@@ -46,27 +46,39 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Contact Form Handling
     const contactForm = document.getElementById('contactForm');
-    
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(contactForm);
-            const data = {};
-            
-            for (let [key, value] of formData.entries()) {
-                data[key] = value;
-            }
-            
-            if (!data.name || !data.email) {
-                alert('Please fill in all required fields.');
-                return;
-            }
-            
-            // Log form data - connect to backend API here
-            console.log('Form submitted:', data);
-            alert('Thank you! We will get back to you soon.');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const formData = new FormData(contactForm);
+        const data = {};
+
+        for (let [key, value] of formData.entries()) {
+            data[key] = value;
+        }
+
+        if (!data.name || !data.email) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+
+        fetch("https://script.google.com/macros/s/AKfycbwXtrgPi6RmdvzfokKBc-wUKG11APlYMOffc-nJOp7hYyevbjVsrNFFHKWB27fmf-xn6Q/exec", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(response => {
+            alert("✅ Thank you! We will get back to you soon.");
             contactForm.reset();
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("❌ Something went wrong.");
         });
-    }
-}); 
+    });
+}
+            
